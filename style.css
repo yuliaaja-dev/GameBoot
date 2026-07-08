@@ -1,0 +1,477 @@
+/* ==========================================================
+   PONG PWA
+   File : style.css
+   ========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+
+    --bg:#050505;
+
+    --panel:#101010;
+
+    --border:#232323;
+
+    --white:#ffffff;
+
+    --blue:#33b5ff;
+
+    --red:#ff4a4a;
+
+    --green:#2dff83;
+
+    --shadow:0 0 30px rgba(0,0,0,.45);
+
+    --radius:18px;
+
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+}
+
+body{
+
+    font-family:Arial,Helvetica,sans-serif;
+
+    background:#000;
+
+    color:#fff;
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* ==========================
+   Background
+========================== */
+
+.background{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    radial-gradient(circle at top,#181818,#000 70%);
+
+    z-index:-2;
+
+}
+
+.background::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+
+    background-size:35px 35px;
+
+    opacity:.4;
+
+}
+
+/* ==========================
+   Header
+========================== */
+
+.topbar{
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+.topbar h1{
+
+    font-size:38px;
+
+    letter-spacing:5px;
+
+    color:white;
+
+}
+
+.topbar p{
+
+    margin-top:6px;
+
+    color:#bbbbbb;
+
+}
+
+/* ==========================
+   Score
+========================== */
+
+.scoreboard{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:25px;
+
+    margin-bottom:20px;
+
+}
+
+.score-box{
+
+    width:120px;
+
+    padding:14px;
+
+    border-radius:var(--radius);
+
+    background:var(--panel);
+
+    border:1px solid var(--border);
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+}
+
+.label{
+
+    display:block;
+
+    color:#aaaaaa;
+
+    font-size:13px;
+
+    margin-bottom:8px;
+
+}
+
+#playerScore{
+
+    color:var(--blue);
+
+    font-size:34px;
+
+    font-weight:bold;
+
+}
+
+#aiScore{
+
+    color:var(--red);
+
+    font-size:34px;
+
+    font-weight:bold;
+
+}
+
+.divider{
+
+    font-size:34px;
+
+    color:white;
+
+}
+
+/* ==========================
+   Game Area
+========================== */
+
+.game-area{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+}
+
+.canvas-wrapper{
+
+    width:min(94vw,920px);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border:2px solid #303030;
+
+    background:#000;
+
+    box-shadow:
+
+    0 0 40px rgba(0,0,0,.6);
+
+}
+
+canvas{
+
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+    background:#050505;
+
+}
+
+/* ==========================
+   Buttons
+========================== */
+
+.controls{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:22px;
+
+}
+
+button{
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    border-radius:14px;
+
+    padding:14px 24px;
+
+    transition:.25s;
+
+}
+
+#startBtn{
+
+    background:#008cff;
+
+}
+
+#restartBtn{
+
+    background:#444;
+
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+button:active{
+
+    transform:scale(.97);
+
+}
+
+/* ==========================
+   Popup
+========================== */
+
+.popup{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.55);
+
+    backdrop-filter:blur(5px);
+
+    z-index:999;
+
+    animation:fade .25s;
+
+}
+
+.hidden{
+
+    display:none;
+
+}
+
+.popup-card{
+
+    width:min(90%,380px);
+
+    padding:30px;
+
+    border-radius:22px;
+
+    background:#101010;
+
+    border:1px solid #333;
+
+    text-align:center;
+
+    box-shadow:
+
+    0 0 40px rgba(0,0,0,.5);
+
+    animation:popup .28s;
+
+}
+
+.popup-card h2{
+
+    font-size:30px;
+
+    margin-bottom:12px;
+
+}
+
+.popup-card p{
+
+    color:#cfcfcf;
+
+    margin-bottom:25px;
+
+    line-height:1.5;
+
+}
+
+#playAgainBtn{
+
+    width:100%;
+
+    background:linear-gradient(90deg,#00a2ff,#00d5ff);
+
+}
+
+/* ==========================
+   Animations
+========================== */
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.8);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media (max-width:700px){
+
+.topbar h1{
+
+    font-size:28px;
+
+}
+
+.score-box{
+
+    width:95px;
+
+}
+
+#playerScore,
+#aiScore{
+
+    font-size:28px;
+
+}
+
+.controls{
+
+    width:100%;
+
+    flex-direction:column;
+
+}
+
+button{
+
+    width:100%;
+
+}
+
+.popup-card{
+
+    padding:24px;
+
+}
+
+}
